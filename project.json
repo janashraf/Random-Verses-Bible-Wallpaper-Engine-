@@ -1,0 +1,69 @@
+{
+	"contentrating" : "Everyone",
+	"description" : "This project features a dynamic background showcasing random verses from the Bible (NIV)\nI welcome any suggestions for future updates to enhance this project further May God bless us all in our endeavors.",
+	"file" : "project backgrounds.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"fontcolor" : 
+			{
+				"condition" : "",
+				"index" : 0,
+				"order" : 100,
+				"text" : "fontColor",
+				"type" : "color",
+				"value" : "1 1 1"
+			},
+			"fontsize" : 
+			{
+				"fraction" : false,
+				"index" : 1,
+				"max" : 72,
+				"min" : 18,
+				"order" : 101,
+				"text" : "fontsize",
+				"type" : "slider",
+				"value" : 24
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "1 1 1"
+			},
+			"videoselector" : 
+			{
+				"index" : 2,
+				"options" : 
+				[
+					{
+						"label" : "Sky",
+						"value" : "your-video.webm"
+					},
+					{
+						"label" : "video 2",
+						"value" : "video 2.webm"
+					}
+				],
+				"order" : 102,
+				"text" : "videoSelector",
+				"type" : "combo",
+				"value" : "your-video.webm"
+			}
+		}
+	},
+	"preview" : "preview.jpg",
+	"ratingsex" : "none",
+	"ratingviolence" : "none",
+	"snapshotformat" : -1,
+	"snapshotoverlay" : "",
+	"tags" : [ "Relaxing" ],
+	"title" : "Random verses bible",
+	"type" : "web",
+	"version" : 2,
+	"visibility" : "public",
+	"workshopid" : "3339575340",
+	"workshopurl" : "steam://url/CommunityFilePage/3339575340"
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Verse Changer with Background</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        /* Full-screen video background */
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the entire screen */
+            z-index: -1; /* Send the video behind other content */
+        }
+
+        /* Verse container styles */
+        .verse-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1; /* Keep the verse in front */
+        }
+
+        .verse {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .reference {
+            /*font-size: 18px;*/
+            font-size: 0.75em; /* Set to 75% of verse font size by default */
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Use a video in WEBM format -->
+    <video class="background-video" autoplay muted loop id="backgroundVideo">
+        <source src="video 2.webm" type="video/webm" id="videoSource"> <!-- Change this to your WEBM video path -->
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="verse-container">
+        <div class="verse" id="verseText"></div>
+        <div class="reference" id="verseReference"></div>
+    </div>
+
+    <!-- Link to the verses.js file -->
+     <script src="verses.js"></script>
+    
+    <script>
+
+
+        function changeVerse() {
+            const verseElement = document.getElementById('verseText');
+            const referenceElement = document.getElementById('verseReference');
+            
+            // Select a random verse
+            const selectedVerse = versesArray[Math.floor(Math.random() * versesArray.length)];
+            
+            // Update the text and reference
+            verseElement.textContent = selectedVerse.verseText;
+            referenceElement.textContent = `~ ${selectedVerse.verseReference}`;
+        }
+
+        // Change verse initially and set interval
+        changeVerse();
+        setInterval(changeVerse,  1* 60 * 1000); // Change every 10 min
+
+        // Listen for changes to the font color property
+    window.wallpaperPropertyListener = {
+        applyUserProperties: function(properties) {
+            if (properties.fontcolor) {
+                // Convert the color from "0 0 0" (RGB) to CSS "rgb(0, 0, 0)"
+                var c = properties.fontcolor.value.split(' ').map(function(c) {
+                    return Math.ceil(c * 255);  // Convert to 0-255 range
+                });
+                var colorString = 'rgb(' + c.join(', ') + ')';
+
+                // Apply the color to both verse and reference
+                document.getElementById('verseText').style.color = colorString;
+                document.getElementById('verseReference').style.color = colorString;
+        }
+
+        if (properties.fontsize) {
+                    // Retrieve the font size from the Wallpaper Engine slider (adjustable by the user)
+                    var fontSize = properties.fontsize.value + 'px';
+                    
+                    // Apply the font size to the verse element
+                    document.getElementById('verseText').style.fontSize = fontSize;
+                    
+                    // Set the reference font size as 75% of the verse font size
+                    document.getElementById('verseReference').style.fontSize = (properties.fontsize.value * 0.75) + 'px';
+                }
+
+
+            // **NEW**: Video switching logic
+        if (properties.videoselector ) {
+            const videoPath = properties.videoselector.value; // Get the selected video path
+            const videoElement = document.getElementById('backgroundVideo');
+            const videoSourceElement = document.getElementById('videoSource');
+            
+            // Update the video source
+            videoSourceElement.src = videoPath;
+            
+            // Reload and play the new video
+            videoElement.load();
+            videoElement.play();
+        }
+        
+
+        
+    }
+};
+
+
+
+          
+
+    </script>
+
+</body>
+</html>
